@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Tokens. Dark is the default; [data-theme="light"] overrides.
+   Warm neutrals throughout — the ground leans brown, never blue.
+   --------------------------------------------------------------- */
+:root {
+  --bg: #14120f;
+  --ink-strong: #f2ece0;
+  --ink: #e8e1d4;
+  --ink-body: #dad2c4;
+  --muted: #9a9086;
+  --faint: #776e63;
+  --fainter: #5c544a;
+  --rule: #2a251e;
+  --rule-soft: #3a332a;
+  --accent: #d98e4f;
+  --accent-dim: #b06f38;
+  --selection: #3a2e20;
+}
+
+[data-theme="light"] {
+  --bg: #f4f0e8;
+  --ink-strong: #171310;
+  --ink: #1f1b16;
+  --ink-body: #322c24;
+  --muted: #6b6155;
+  --faint: #8a8073;
+  --fainter: #a2988a;
+  --rule: #ded5c5;
+  --rule-soft: #ded5c5;
+  --accent: #a85a23;
+  --accent-dim: #8a4a1c;
+  --selection: #e6dcc9;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-ink-strong: var(--ink-strong);
+  --color-ink: var(--ink);
+  --color-ink-body: var(--ink-body);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-fainter: var(--fainter);
+  --color-rule: var(--rule);
+  --color-rule-soft: var(--rule-soft);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+}
+
+html {
+  background: var(--bg);
+  color-scheme: dark;
+}
+[data-theme="light"] { color-scheme: light; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--selection); color: var(--ink-strong); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------
+   Mono chrome: the machine layer. Labels, nav, metadata, buttons.
+   --------------------------------------------------------------- */
+.chrome {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+}
+
+/* ---------------------------------------------------------------
+   Prose: the literature layer. Serif body, generous measure.
+   --------------------------------------------------------------- */
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.1875rem;
+  line-height: 1.78;
+  color: var(--ink-body);
+}
+.prose > * + * { margin-top: 1.35em; }
+.prose h2,
+.prose h3 {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-strong);
+  margin-top: 2.4em;
+  margin-bottom: -0.35em;
+}
+.prose h2 { font-size: 1.25rem; }
+.prose h3 { font-size: 1.0625rem; color: var(--ink); }
+.prose a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-dim);
+}
+.prose a:hover { color: var(--accent-dim); }
+.prose strong { color: var(--ink-strong); font-weight: 600; }
+.prose em { font-style: italic; }
+.prose ul,
+.prose ol { padding-left: 1.4em; }
+.prose ul { list-style: none; }
+.prose ul > li { position: relative; }
+.prose ul > li::before {
+  content: "—";
+  position: absolute;
+  left: -1.4em;
+  color: var(--faint);
+}
+.prose ol { list-style: decimal; }
+.prose ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--faint);
+}
+.prose li + li { margin-top: 0.5em; }
+.prose blockquote {
+  border-left: 1px solid var(--accent-dim);
+  padding-left: 1.4em;
+  color: var(--muted);
+  font-style: italic;
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--rule);
+  padding: 0.15em 0.4em;
+  color: var(--ink-strong);
+}
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  background: var(--rule);
+  border: 1px solid var(--rule-soft);
+  padding: 1.1em 1.3em;
+  overflow-x: auto;
+}
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin-top: 2.6em;
+  margin-bottom: 2.6em;
+}
+.prose img { max-width: 100%; height: auto; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
+.prose th,
+.prose td { border-bottom: 1px solid var(--rule); padding: 0.6em 0.8em; text-align: left; }
+.prose th { font-family: var(--font-mono); font-size: 0.75em; letter-spacing: 0.14em; color: var(--faint); font-weight: 400; }
+
+/* ---------------------------------------------------------------
+   Page shell — one measure for every page.
+   --------------------------------------------------------------- */
+.shell {
+  margin-inline: auto;
+  max-width: 72rem;
+  padding-inline: 1.5rem;
+}
+@media (min-width: 640px) { .shell { padding-inline: 2.5rem; } }
+@media (min-width: 1024px) { .shell { padding-inline: 5.5rem; } }
+
+/* A labelled row: mono label in the gutter, content alongside.
+   Stacks on narrow screens. */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+@media (min-width: 768px) {
+  .row { flex-direction: row; gap: 4rem; align-items: flex-start; }
+  .row > .row-label { width: 10.5rem; flex-shrink: 0; padding-top: 0.45rem; }
+}
