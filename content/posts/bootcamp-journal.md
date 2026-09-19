@@ -2,7 +2,7 @@
 title: "Bootcamp Journal"
 date: "2016-05-09"
 excerpt: "Interesting things are happening to my brain."
-tags: ["gooWee"]
+tags: ["Peace Corps"]
 draft: false
 ---
 
