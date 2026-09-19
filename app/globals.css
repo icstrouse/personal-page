@@ -90,12 +90,14 @@ body {
   }
 }
 
-/* Theme toggle label. Dark is the default, so the button offers LIGHT until
-   [data-theme="light"] is set, at which point it offers DARK. Pure CSS, so the
-   label is correct before any JavaScript runs. */
+/* Theme toggle icons. Dark is the default, so the button offers the sun until
+   [data-theme="light"] is set, at which point it offers the moon. Pure CSS, so
+   the correct icon is showing before any JavaScript runs. */
+.theme-to-light,
+.theme-to-dark { display: block; }
 .theme-to-dark { display: none; }
 [data-theme="light"] .theme-to-light { display: none; }
-[data-theme="light"] .theme-to-dark { display: inline; }
+[data-theme="light"] .theme-to-dark { display: block; }
 
 .label {
   font-family: var(--font-mono);
