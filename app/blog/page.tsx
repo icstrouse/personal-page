@@ -59,7 +59,7 @@ export default function BlogIndex() {
                             key={tag}
                             className="font-mono text-[0.6875rem] tracking-[0.16em] text-fainter"
                           >
-                            {tag.toUpperCase()}
+                            {tag}
                           </li>
                         ))}
                       </ul>

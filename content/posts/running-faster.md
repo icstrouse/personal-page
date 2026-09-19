@@ -2,7 +2,7 @@
 title: "Running Faster"
 date: "2012-01-07"
 excerpt: "It occurred to me that, in a way, she was holding herself back."
-tags: ["archive"]
+tags: ["Boulder"]
 draft: false
 ---
 

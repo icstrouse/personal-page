@@ -2,7 +2,7 @@
 title: "Play vs Purpose"
 date: "2013-02-13"
 excerpt: "I don’t have to choose between being a lifeless automaton or a useless diva. Or do I?"
-tags: ["archive"]
+tags: ["Boulder"]
 draft: false
 ---
 

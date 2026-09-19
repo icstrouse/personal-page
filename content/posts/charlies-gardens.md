@@ -2,7 +2,7 @@
 title: "Charlie’s Gardens"
 date: "2012-09-13"
 excerpt: "This is your life right now. It’s a mess. You can make it better, but you have to spend some time and energy on it."
-tags: ["archive"]
+tags: ["Boulder"]
 draft: false
 ---
 
