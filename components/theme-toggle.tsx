@@ -1,55 +1,25 @@
-"use client";
-
-import { useSyncExternalStore } from "react";
-
-type Theme = "dark" | "light";
-
 /**
- * The theme lives on <html data-theme>, set before first paint by the inline
- * script in the root layout. This component reads it rather than owning it, so
- * there is a single source of truth and no effect-driven state sync.
+ * Deliberately has no hooks, no onClick and no "use client" of its own.
+ *
+ * The button is plain server-rendered markup. Which label shows is decided by
+ * CSS from [data-theme] on <html>, and the click is handled by a delegated
+ * listener in the inline script in app/layout.tsx. That script runs while the
+ * document is still parsing, so the toggle works from first paint and keeps
+ * working even if React never hydrates — which a hook-driven version cannot
+ * promise on a flaky mobile connection.
  */
-function subscribe(onChange: () => void) {
-  const observer = new MutationObserver(onChange);
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
-  return () => observer.disconnect();
-}
-
-function getSnapshot(): Theme {
-  return document.documentElement.getAttribute("data-theme") === "light"
-    ? "light"
-    : "dark";
-}
-
-function getServerSnapshot(): Theme {
-  return "dark";
-}
-
 export default function ThemeToggle() {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-  const next: Theme = theme === "dark" ? "light" : "dark";
-
-  function toggle() {
-    document.documentElement.setAttribute("data-theme", next);
-    try {
-      window.localStorage.setItem("theme", next);
-    } catch {
-      /* private mode or blocked storage — the toggle still works for this visit */
-    }
-  }
-
   return (
     <button
       type="button"
-      onClick={toggle}
-      aria-label={`Switch to ${next} theme`}
-      suppressHydrationWarning
-      className="chrome cursor-pointer text-muted transition-colors hover:text-accent"
+      data-theme-toggle
+      aria-label="Toggle colour theme"
+      className="flex min-h-11 cursor-pointer items-center text-muted transition-colors hover:text-accent"
     >
-      {next.toUpperCase()}
+      <span className="chrome pb-1">
+        <span className="theme-to-light">LIGHT</span>
+        <span className="theme-to-dark">DARK</span>
+      </span>
     </button>
   );
 }

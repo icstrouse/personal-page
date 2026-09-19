@@ -72,9 +72,9 @@ export default async function PostPage({
         <footer className="mt-16 border-t border-rule pt-8">
           <Link
             href="/blog"
-            className="chrome text-muted transition-colors hover:text-accent"
+            className="flex min-h-11 items-center text-muted transition-colors hover:text-accent"
           >
-            &#8592; ALL ENTRIES
+            <span className="chrome">&#8592; ALL ENTRIES</span>
           </Link>
         </footer>
       </article>

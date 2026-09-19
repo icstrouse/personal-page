@@ -15,5 +15,5 @@ export const SITE = {
   name: "Ian Strouse",
   domain: "ICSTROUSE.COM",
   role: "FULL STACK ENGINEER",
-  location: "BOULDER, COLORADO",
+  location: "BROOMFIELD, COLORADO",
 } as const;

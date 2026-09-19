@@ -22,7 +22,7 @@ export default function Home() {
       <section className="row">
         <h2 className="label row-label">ABOUT ME</h2>
         <p className="prose max-w-[41rem]">
-          I&rsquo;m a software engineer with 9 years of experience, primarily in
+          I&rsquo;m a software engineer with 10 years of experience, primarily in
           backend engineering. Coming from a liberal arts background, I began my
           journey with a focus on people, but quickly developed my technical
           chops, learning IT and software development. I am now an experienced
@@ -63,6 +63,7 @@ export default function Home() {
         <Link
           href="/Ian_Strouse_Resume.pdf"
           className="inline-flex min-h-12 items-center justify-between gap-3 border border-accent px-5 py-3 font-mono text-[0.8125rem] tracking-[0.18em] text-accent transition-colors hover:bg-accent hover:text-bg sm:px-6"
+          target="_blank"
         >
           RESUME
           <span aria-hidden="true">&#8594;</span>

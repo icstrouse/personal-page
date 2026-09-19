@@ -11,12 +11,23 @@ export default function SiteHeader() {
 
   return (
     <header className="border-b border-rule">
-      <div className="shell flex items-baseline justify-between gap-6 py-7">
-        <Link href="/" className="chrome text-muted transition-colors hover:text-accent">
-          {SITE.domain}
+      {/*
+        Two rules keep this robust on small screens:
+        1. The nav (which holds the theme toggle) is shrink-0, and the wordmark
+           is min-w-0 + truncate — so if anything ever runs out of room it is
+           the wordmark that clips, never a control that gets pushed off-screen.
+        2. Every control is a 44px tap target, with pb-1 on all three inner
+           spans so their baselines agree whether or not one is underlined.
+      */}
+      <div className="shell flex items-center justify-between gap-4 py-2 sm:gap-6 sm:py-4">
+        <Link
+          href="/"
+          className="flex min-h-11 min-w-0 items-center text-muted transition-colors hover:text-accent"
+        >
+          <span className="chrome min-w-0 truncate pb-1">{SITE.domain}</span>
         </Link>
 
-        <nav className="flex items-baseline gap-6 sm:gap-10">
+        <nav className="flex shrink-0 items-center gap-4 sm:gap-10">
           {links.map((link) => {
             const active =
               link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -27,11 +38,17 @@ export default function SiteHeader() {
                 aria-current={active ? "page" : undefined}
                 className={
                   active
-                    ? "chrome border-b border-accent pb-1 text-accent"
-                    : "chrome pb-1 text-muted transition-colors hover:text-accent"
+                    ? "flex min-h-11 items-center text-accent"
+                    : "flex min-h-11 items-center text-muted transition-colors hover:text-accent"
                 }
               >
-                {link.label}
+                <span
+                  className={
+                    active ? "chrome border-b border-accent pb-1" : "chrome pb-1"
+                  }
+                >
+                  {link.label}
+                </span>
               </Link>
             );
           })}

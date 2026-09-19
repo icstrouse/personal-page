@@ -54,6 +54,10 @@
 html {
   background: var(--bg);
   color-scheme: dark;
+  /* Always reserve the scrollbar gutter. Without this, navigating between a
+     page that scrolls and one that doesn't shifts the centred .shell
+     sideways. */
+  scrollbar-gutter: stable;
 }
 [data-theme="light"] { color-scheme: light; }
 
@@ -76,9 +80,22 @@ body {
    --------------------------------------------------------------- */
 .chrome {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
 }
+@media (min-width: 640px) {
+  .chrome {
+    font-size: 0.8125rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* Theme toggle label. Dark is the default, so the button offers LIGHT until
+   [data-theme="light"] is set, at which point it offers DARK. Pure CSS, so the
+   label is correct before any JavaScript runs. */
+.theme-to-dark { display: none; }
+[data-theme="light"] .theme-to-light { display: none; }
+[data-theme="light"] .theme-to-dark { display: inline; }
 
 .label {
   font-family: var(--font-mono);

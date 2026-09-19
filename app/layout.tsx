@@ -33,10 +33,23 @@ export const metadata: Metadata = {
  */
 const themeScript = `
 (function () {
+  var root = document.documentElement;
   try {
-    var stored = localStorage.getItem("theme");
-    if (stored === "light") document.documentElement.setAttribute("data-theme", "light");
+    if (localStorage.getItem("theme") === "light") root.setAttribute("data-theme", "light");
   } catch (e) {}
+
+  // Delegated, so it is live while the document is still parsing and does not
+  // depend on React hydration.
+  document.addEventListener("click", function (event) {
+    var target = event.target;
+    if (!target || typeof target.closest !== "function") return;
+    if (!target.closest("[data-theme-toggle]")) return;
+    var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+    root.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch (e) {}
+  });
 })();
 `;
 
