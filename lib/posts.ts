@@ -79,17 +79,25 @@ export async function getPost(slug: string): Promise<Post | null> {
   };
 }
 
-/** "18 SEP 2026" — mono metadata, fixed to UTC so the date never drifts. */
+const MONTHS = [
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+] as const;
+
+/**
+ * "18 SEP 2026" — always exactly 11 characters.
+ *
+ * Deliberately not Intl.DateTimeFormat: with month "short" it renders
+ * September as "Sept" in current ICU versions while every other month is three
+ * letters, which breaks the alignment of the monospace date column. A fixed
+ * table is also immune to the host's ICU version and locale data.
+ *
+ * Parsed at UTC so the date never drifts by a day.
+ */
 export function formatDate(iso: string): string {
   if (!iso) return "";
   const parsed = new Date(`${iso}T00:00:00Z`);
   if (Number.isNaN(parsed.getTime())) return iso;
-  return new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  })
-    .format(parsed)
-    .toUpperCase();
+  const day = String(parsed.getUTCDate()).padStart(2, "0");
+  return `${day} ${MONTHS[parsed.getUTCMonth()]} ${parsed.getUTCFullYear()}`;
 }
