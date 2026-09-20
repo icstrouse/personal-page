@@ -4,7 +4,6 @@ import { SITE } from "@/lib/nav";
 const CONNECT = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/ian-strouse/" },
   { label: "GitHub", href: "https://github.com/icstrouse" },
-  { label: "LeetCode", href: "https://leetcode.com/u/icstrouse/" },
 ];
 
 export default function Home() {

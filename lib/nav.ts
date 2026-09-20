@@ -14,6 +14,6 @@ export const NAV: NavLink[] = [
 export const SITE = {
   name: "Ian Strouse",
   domain: "ICSTROUSE.COM",
-  role: "FULL STACK ENGINEER",
+  role: "INTERPRETER: CODE AND HUMAN",
   location: "BROOMFIELD, COLORADO",
 } as const;
